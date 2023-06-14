@@ -35,6 +35,8 @@ class GameSettings:
 
             self._print_prompt(base_pokemon, second_pokemon)
             val = self._read_input()
+            if val == 8:
+                self._difficulty = self._get_difficulty()
             if val == 9:
                 break
             self._evaluate_results(base_pokemon, second_pokemon, val)
@@ -47,6 +49,7 @@ class GameSettings:
         print("1: #{0} {1}".format(base_pokemon.get_dex_num(), base_pokemon.get_name()))
         print("2: #{0} {1}".format(second_pokemon.get_dex_num(), second_pokemon.get_name()))
         print("3: Equal")
+        print("8: Change difficulty")
         print("9: Quit")
 
     def _read_input(self) -> 1:
@@ -58,9 +61,11 @@ class GameSettings:
                 return 2
             if val == "3":
                 return 3
+            if val == "8":
+                return 8
             if val == "9":
                 return 9
-            print("Please enter 1, 2, 3, or 9")
+            print("Please enter 1, 2, 3, 8, or 9")
 
     def _evaluate_results(self, base_pokemon: Pokemon, second_pokemon: Pokemon, val: int):
         if base_pokemon.get_speed() > second_pokemon.get_speed():
